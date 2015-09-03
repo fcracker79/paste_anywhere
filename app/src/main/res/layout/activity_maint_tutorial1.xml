@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MaintTutorial1Activity"
+    android:orientation="vertical"
+    android:id="@+id/iddio"
+    android:layout_centerHorizontal="true"
+    android:weightSum="30"
+    android:gravity="center">
+
+    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_weight="1"/>
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_black"
+        android:id="@+id/title_checkbox"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mirkuccioBellissimo"
+        android:src="@drawable/mirkuccio"
+        android:layout_weight="5"/>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch_pasticcia_colori"
+        android:text="@string/pasticcia_colori"/>
+    <Button
+        android:onClick="onNascondiLoSgorbio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nascondi_sgorbio"
+        android:id="@+id/button"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</LinearLayout>
