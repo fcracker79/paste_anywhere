@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -41,18 +42,43 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
-                            ((ImageView) findViewById(R.id.mirkuccioBellissimo))
-                                    .setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
+                            getMirkuccioBellissimo().setColorFilter(Color.RED, PorterDuff.Mode.LIGHTEN);
                         } else {
-                            ((ImageView) findViewById(R.id.mirkuccioBellissimo))
-                                    .setColorFilter(null);
+                            getMirkuccioBellissimo().setColorFilter(null);
                         }
                     }
                 }
 
         );
+
+        ((RadioGroup) findViewById(R.id.radioGroupSfondo)).setOnCheckedChangeListener(
+                new RadioGroup.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        final int color;
+                        switch (checkedId) {
+                            case R.id.radioButtonSfondoRosso:
+                                color = Color.RED;
+                                break;
+                            case R.id.radioButtonSfondoVerde:
+                                color = Color.GREEN;
+                                break;
+                            case R.id.radioButtonSfondoBlu:
+                                color = Color.BLUE;
+                                break;
+                            default:
+                                throw new IllegalArgumentException("Unexpected id");
+                        }
+
+                        getMirkuccioBellissimo().setBackgroundColor(color);
+                    }
+                }
+        );
     }
 
+    private ImageView getMirkuccioBellissimo() {
+        return (ImageView) findViewById(R.id.mirkuccioBellissimo);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -61,7 +87,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                View view = findViewById(R.id.mirkuccioBellissimo);
+                View view = getMirkuccioBellissimo();
                 view.setAlpha(view.getAlpha() == 0.5f ? 1f : 0.5f);
 
                 return true;
@@ -88,7 +114,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
 
     public void onNascondiLoSgorbio(View theButtonView) {
         final Button theButton = (Button) theButtonView;
-        final View mirkuccioBellissimo = findViewById(R.id.mirkuccioBellissimo);
+        final View mirkuccioBellissimo = getMirkuccioBellissimo();
         if (mirkuccioBellissimo.getVisibility() == View.VISIBLE) {
             mirkuccioBellissimo.setVisibility(View.INVISIBLE);
             theButton.setText(R.string.mostra_sgorbio);

@@ -2,4 +2,8 @@
     <string name="app_name">Che ficata di tutorial 1</string>
 
     <string name="action_settings">Settings</string>
+    <string name="sfondoRosso">Voglio lo sfondo rosso!</string>
+    <string name="sfondoVerde">Voglio lo sfondo verde!</string>
+    <string name="sfondoBlu">Voglio lo sfondo blu!</string>
+
 </resources>

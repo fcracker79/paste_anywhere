@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -7,37 +7,70 @@
     android:orientation="vertical"
     android:id="@+id/iddio"
     android:layout_centerHorizontal="true"
-    android:weightSum="30"
-    android:gravity="center">
+    android:weightSum="30">
 
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView"
-        android:layout_weight="1"/>
+        android:id="@+id/textView"/>
     <CheckBox
+        android:layout_below="@id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_black"
         android:id="@+id/title_checkbox"/>
     <ImageView
+        android:layout_marginTop="@dimen/paddingMirkuccioBellissimo"
+        android:layout_marginBottom="@dimen/paddingMirkuccioBellissimo"
+        android:paddingLeft="@dimen/paddingMirkuccioBellissimo"
+        android:layout_below="@id/title_checkbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/mirkuccioBellissimo"
-        android:src="@drawable/mirkuccio"
-        android:layout_weight="5"/>
+        android:src="@drawable/mirkuccio"/>
 
     <Switch
+        android:layout_below="@id/mirkuccioBellissimo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/switch_pasticcia_colori"
         android:text="@string/pasticcia_colori"/>
     <Button
+        android:layout_below="@id/switch_pasticcia_colori"
         android:onClick="onNascondiLoSgorbio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nascondi_sgorbio"
-        android:id="@+id/button"
-        android:layout_weight="1"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-</LinearLayout>
+        android:id="@+id/button" />
+
+    <RadioGroup
+        android:layout_marginTop="@dimen/paddingMirkuccioBellissimo"
+        android:layout_alignTop="@dimen/paddingMirkuccioBellissimo"
+        android:layout_toRightOf="@id/mirkuccioBellissimo"
+        android:layout_toEndOf="@id/mirkuccioBellissimo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/title_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroupSfondo"
+        android:gravity="end">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonSfondoRosso"
+            android:text="@string/sfondoRosso"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonSfondoVerde"
+            android:text="@string/sfondoVerde"/>
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioButtonSfondoBlu"
+            android:text="@string/sfondoBlu"/>
+    </RadioGroup>
+</RelativeLayout>
