@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -9,68 +9,108 @@
     android:layout_centerHorizontal="true"
     android:stretchColumns="1">
 
-    <TableRow>
-        <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView"/>
-    </TableRow>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <TableRow>
-        <CheckBox
-            android:layout_column="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_black"
-            android:id="@+id/title_checkbox"/>
-    </TableRow>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#000000"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#000040"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#004040"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#404040"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#404080"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#408080"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#808080"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#8080c0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#80c0c0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#c0c0c0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#c0c0e0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#c0e0e0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#e0e0e0"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#e0e0ff"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#e0ffff"/>
+        />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_weight="1"
+            android:layout_height="80dip"
+            android:background="#ffffff"/>
+        />
+    </LinearLayout>
 
-    <TableRow>
-        <ImageView
-            android:layout_marginTop="@dimen/paddingMirkuccioBellissimo"
-            android:layout_marginBottom="@dimen/paddingMirkuccioBellissimo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/mirkuccioBellissimo"
-            android:src="@drawable/mirkuccio"/>
-        <RadioGroup
-            android:layout_marginTop="@dimen/paddingMirkuccioBellissimo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/radioGroupSfondo">
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButtonSfondoRosso"
-                android:text="@string/sfondoRosso"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButtonSfondoVerde"
-                android:text="@string/sfondoVerde"/>
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/radioButtonSfondoBlu"
-                android:text="@string/sfondoBlu"/>
-        </RadioGroup>
-    </TableRow>
-
-    <TableRow>
-        <Switch
-            android:layout_column="0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/switch_pasticcia_colori"
-            android:text="@string/pasticcia_colori"/>
-        <Button
-            android:onClick="onNascondiLoSgorbio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/nascondi_sgorbio"
-            android:id="@+id/button" />
-    </TableRow>
-
-</TableLayout>
+</ScrollView>
