@@ -5,7 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Gallery;
+import android.widget.GridView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.util.Random;
 
@@ -15,6 +24,23 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
+
+        final ArrayAdapter listAdapter =
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"a", "b", "c", "d"});
+
+        final ListView listView = (ListView) findViewById(R.id.myAdapterListView);
+        listView.setAdapter(listAdapter);
+        listView.setSelection(R.id.selection);
+
+        final Spinner spinner = findViewBy(R.id.myAdapterSpinner, Spinner.class);
+        spinner.setAdapter(listAdapter);
+
+        final GridView grid = findViewBy(R.id.myAdapterGridView, GridView.class);
+        grid.setAdapter(listAdapter);
+    }
+
+    private <T extends View> T findViewBy(int d, Class<T> clazz) {
+        return (T) findViewById(d);
     }
 
     @Override
@@ -38,14 +64,5 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private static final Random RND = new Random(System.currentTimeMillis());
-    public void stopOrStartProgress(View v) {
-        final ProgressBar b = (ProgressBar) v;
-        b.setIndeterminate(!b.isIndeterminate());
-        if (!b.isIndeterminate()) {
-            b.setProgress(RND.nextInt(100));
-        }
     }
 }
