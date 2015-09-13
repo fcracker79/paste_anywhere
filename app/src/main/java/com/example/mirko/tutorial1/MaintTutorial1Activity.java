@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+
+import java.util.Random;
 
 public class MaintTutorial1Activity extends AppCompatActivity {
 
@@ -34,5 +38,14 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private static final Random RND = new Random(System.currentTimeMillis());
+    public void stopOrStartProgress(View v) {
+        final ProgressBar b = (ProgressBar) v;
+        b.setIndeterminate(!b.isIndeterminate());
+        if (!b.isIndeterminate()) {
+            b.setProgress(RND.nextInt(100));
+        }
     }
 }
