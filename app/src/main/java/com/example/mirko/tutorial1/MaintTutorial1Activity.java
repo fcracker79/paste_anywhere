@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -26,12 +27,21 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_maint_tutorial1);
 
         final ArrayAdapter listAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"a", "b", "c", "d"});
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
+                        new String[]{"a", "b", "c", "d"});
 
         final ListView listView = (ListView) findViewById(R.id.myAdapterListView);
         listView.setAdapter(listAdapter);
         listView.setSelection(R.id.selection);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MaintTutorial1Activity.this,
+                        String.format("Item clicked: %s", parent.getItemAtPosition(position)),
+                        Toast.LENGTH_SHORT).show();
 
+            }
+        });
         final Spinner spinner = findViewBy(R.id.myAdapterSpinner, Spinner.class);
         spinner.setAdapter(listAdapter);
 

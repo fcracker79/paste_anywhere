@@ -14,16 +14,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/list_view"/>
     <ListView
         android:id="@+id/myAdapterListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/grid_view"/>
     <GridView
         android:id="@+id/myAdapterGridView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice"
+        android:numColumns="2"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spinner"/>
     <Spinner
         android:id="@+id/myAdapterSpinner"
         android:layout_width="wrap_content"

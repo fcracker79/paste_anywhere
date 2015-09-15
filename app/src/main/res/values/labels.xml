@@ -5,4 +5,7 @@
     <string name="title_black">No! Lo voglio nero!</string>
     <string name="title_red">No! Lo voglio rosso!</string>
     <string name="pasticcia_colori">Pasticcia i colori</string>
+    <string name="list_view">List view</string>
+    <string name="grid_view">Grid view</string>
+    <string name="spinner">Spinner</string>
 </resources>
