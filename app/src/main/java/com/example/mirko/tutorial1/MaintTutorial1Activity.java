@@ -6,8 +6,11 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MaintTutorial1Activity extends ListActivity {
@@ -19,8 +22,27 @@ public class MaintTutorial1Activity extends ListActivity {
         setContentView(R.layout.activity_maint_tutorial1);
 
         final ArrayAdapter listAdapter =
-                new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
-                        DATA);
+                new ArrayAdapter(this, R.layout.myrow, R.id.label, DATA) {
+                    @Override
+                    public View getView(int position, View convertView,
+                                        ViewGroup parent) {
+                        final View row = super.getView(position, convertView, parent);
+                        ViewHolder h = (ViewHolder) row.getTag();
+                        if (h == null) {
+                            h = new ViewHolder(row);
+                            row.setTag(h);
+                        }
+                        if (position % 2 == 0) {
+                            h.icon.setImageResource(R.drawable.mirkuccio);
+                        }
+                        else {
+                            h.icon.setImageResource(R.drawable.ic_launcher);
+                        }
+                        h.size.setText(String.valueOf(DATA[position].length()));
+                        h.label.setText(DATA[position]);
+                        return row;
+                    }
+                };
 
         setListAdapter(listAdapter);
     }
@@ -64,5 +86,16 @@ public class MaintTutorial1Activity extends ListActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private static class ViewHolder {
+        private final ImageView icon;
+        private final TextView size;
+        private final TextView label;
+        public ViewHolder(View row) {
+            this.icon = (ImageView) row.findViewById(R.id.myicon);
+            this.size = (TextView) row.findViewById(R.id.size);
+            this.label = (TextView) row.findViewById(R.id.label);
+        }
     }
 }
