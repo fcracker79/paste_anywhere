@@ -2,11 +2,16 @@ package com.example.mirko.tutorial1;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 public class MaintTutorial1Activity extends ListActivity {
+    private static final String[] DATA = {"Minnie", "Topolino", "Gambadilegno", "Pluto"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,8 +20,27 @@ public class MaintTutorial1Activity extends ListActivity {
 
         final ArrayAdapter listAdapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice,
-                        new String[]{"afa", "beta", "gamma", "delta"});
+                        DATA);
+
         setListAdapter(listAdapter);
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        SparseBooleanArray checkedItemPositions = l.getCheckedItemPositions();
+
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < DATA.length; i++) {
+            if (checkedItemPositions.get(i, false)) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(DATA[i]);
+            }
+        }
+        Toast.makeText(MaintTutorial1Activity.this, sb.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
