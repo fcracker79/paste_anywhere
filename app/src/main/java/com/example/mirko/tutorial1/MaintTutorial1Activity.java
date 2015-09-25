@@ -4,11 +4,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.Date;
 
 public class MaintTutorial1Activity extends AppCompatActivity {
     @Override
@@ -24,6 +28,16 @@ public class MaintTutorial1Activity extends AppCompatActivity {
             // This is to prevent redirects from opening another page rather than reusing the
             // current display area
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Toast.makeText(MaintTutorial1Activity.this,
+                        String.format("Opening %s at %s",
+                                url,
+                                DateUtils.formatDateTime(
+                                        MaintTutorial1Activity.this,
+                                        new Date().getTime(),
+                                        DateUtils.FORMAT_SHOW_DATE
+                                                | DateUtils.FORMAT_SHOW_TIME
+                                        )),
+                        Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
@@ -46,7 +60,12 @@ public class MaintTutorial1Activity extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable s) {
-                        myBrowser.loadUrl(s.toString());
+                        final String data = s.toString();
+                        if (data.startsWith("<html>")) {
+                            myBrowser.loadData(data, "text/html", "utf-8");
+                        } else {
+                            myBrowser.loadUrl(data);
+                        }
                     }
                 }
         );
