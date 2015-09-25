@@ -1,68 +1,51 @@
 package com.example.mirko.tutorial1;
 
-import android.app.ListActivity;
 import android.os.Bundle;
-import android.util.SparseBooleanArray;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.EditText;
 
-public class MaintTutorial1Activity extends ListActivity {
-    private static final String[] DATA = {"Minnie", "Topolino", "Gambadilegno", "Pluto"};
-
+public class MaintTutorial1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
 
-        final ArrayAdapter listAdapter =
-                new ArrayAdapter(this, R.layout.myrow, R.id.label, DATA) {
-                    @Override
-                    public View getView(int position, View convertView,
-                                        ViewGroup parent) {
-                        final View row = super.getView(position, convertView, parent);
-                        ViewHolder h = (ViewHolder) row.getTag();
-                        if (h == null) {
-                            h = new ViewHolder(row);
-                            row.setTag(h);
-                        }
-                        if (position % 2 == 0) {
-                            h.icon.setImageResource(R.drawable.mirkuccio);
-                        }
-                        else {
-                            h.icon.setImageResource(R.drawable.ic_launcher);
-                        }
-                        h.size.setText(String.valueOf(DATA[position].length()));
-                        h.label.setText(DATA[position]);
-                        return row;
-                    }
-                };
-
-        setListAdapter(listAdapter);
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-
-        SparseBooleanArray checkedItemPositions = l.getCheckedItemPositions();
-
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < DATA.length; i++) {
-            if (checkedItemPositions.get(i, false)) {
-                if (sb.length() > 0) {
-                    sb.append(", ");
-                }
-                sb.append(DATA[i]);
+        final WebView myBrowser = (WebView) findViewById(R.id.myBrowser);
+        myBrowser.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
             }
-        }
-        Toast.makeText(MaintTutorial1Activity.this, sb.toString(), Toast.LENGTH_SHORT).show();
+        });
+        
+        myBrowser.loadUrl("http://www.google.it");
+
+        final EditText e = (EditText) findViewById(R.id.urlField);
+
+        e.addTextChangedListener(
+                new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable s) {
+                        myBrowser.loadUrl(s.toString());
+                    }
+                }
+        );
     }
 
     @Override
@@ -88,14 +71,4 @@ public class MaintTutorial1Activity extends ListActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private static class ViewHolder {
-        private final ImageView icon;
-        private final TextView size;
-        private final TextView label;
-        public ViewHolder(View row) {
-            this.icon = (ImageView) row.findViewById(R.id.myicon);
-            this.size = (TextView) row.findViewById(R.id.size);
-            this.label = (TextView) row.findViewById(R.id.label);
-        }
-    }
 }

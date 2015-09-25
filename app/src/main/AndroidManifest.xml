@@ -16,6 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
     <supports-screens
@@ -24,5 +25,5 @@
         android:normalScreens="true"
         android:smallScreens="false"
         />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>
