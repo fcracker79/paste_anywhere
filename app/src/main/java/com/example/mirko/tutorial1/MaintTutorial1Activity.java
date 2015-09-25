@@ -17,6 +17,8 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_maint_tutorial1);
 
         final WebView myBrowser = (WebView) findViewById(R.id.myBrowser);
+        myBrowser.getSettings().setJavaScriptEnabled(true);
+
         myBrowser.setWebViewClient(new WebViewClient() {
             @Override
             // This is to prevent redirects from opening another page rather than reusing the
