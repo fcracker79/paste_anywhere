@@ -19,11 +19,13 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         final WebView myBrowser = (WebView) findViewById(R.id.myBrowser);
         myBrowser.setWebViewClient(new WebViewClient() {
             @Override
+            // This is to prevent redirects from opening another page rather than reusing the
+            // current display area
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
         });
-        
+
         myBrowser.loadUrl("http://www.google.it");
 
         final EditText e = (EditText) findViewById(R.id.urlField);
