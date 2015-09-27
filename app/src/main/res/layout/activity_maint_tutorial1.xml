@@ -9,25 +9,17 @@
     android:layout_centerHorizontal="true"
     android:stretchColumns="1">
 
-    <LinearLayout
-        android:id="@+id/urlArea"
+    <TextView
+        android:id="@+id/dateTimeText"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/urlLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/scegliUrl"/>
-        <EditText
-            android:id="@+id/urlField"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textUri" />
-    </LinearLayout>
-
-    <WebView
-        android:id="@+id/myBrowser"
+        android:layout_height="0dp"
+        android:layout_weight="10"/>
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="@string/showDateTime"
+        android:onClick="onClickGetDateTime"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        style="@style/fancytext"/>
 </LinearLayout>

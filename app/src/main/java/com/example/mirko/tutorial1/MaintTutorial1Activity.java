@@ -7,9 +7,11 @@ import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
@@ -19,56 +21,6 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
-
-        final WebView myBrowser = (WebView) findViewById(R.id.myBrowser);
-        myBrowser.getSettings().setJavaScriptEnabled(true);
-
-        myBrowser.setWebViewClient(new WebViewClient() {
-            @Override
-            // This is to prevent redirects from opening another page rather than reusing the
-            // current display area
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Toast.makeText(MaintTutorial1Activity.this,
-                        String.format("Opening %s at %s",
-                                url,
-                                DateUtils.formatDateTime(
-                                        MaintTutorial1Activity.this,
-                                        new Date().getTime(),
-                                        DateUtils.FORMAT_SHOW_DATE
-                                                | DateUtils.FORMAT_SHOW_TIME
-                                        )),
-                        Toast.LENGTH_SHORT).show();
-                return false;
-            }
-        });
-
-        myBrowser.loadUrl("http://www.google.it");
-
-        final EditText e = (EditText) findViewById(R.id.urlField);
-
-        e.addTextChangedListener(
-                new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                    }
-
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(Editable s) {
-                        final String data = s.toString();
-                        if (data.startsWith("<html>")) {
-                            myBrowser.loadData(data, "text/html", "utf-8");
-                        } else {
-                            myBrowser.loadUrl(data);
-                        }
-                    }
-                }
-        );
     }
 
     @Override
@@ -92,6 +44,13 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClickGetDateTime(View v) {
+        ((TextView) findViewById(R.id.dateTimeText)).setText(
+                DateUtils.formatDateTime(this, new Date().getTime(),
+                        DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME)
+        );
     }
 
 }
