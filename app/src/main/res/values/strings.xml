@@ -3,5 +3,6 @@
 
     <string name="action_settings">Settings</string>
     <string name="showDateTime">Mostra data corrente</string>
-
+    <string name="menu_add">Aggiungi</string>
+    <string name="menu_remove">Rimuovi</string>
 </resources>
