@@ -3,6 +3,7 @@ package com.example.mirko.tutorial1;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
 import android.view.Menu;
@@ -70,5 +71,17 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 
         startActivity(intent);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        Toast.makeText(this, "Main activity onCreate", Toast.LENGTH_SHORT).show();
+        super.onCreate(savedInstanceState, persistentState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(this, "Main activity onDestroy", Toast.LENGTH_SHORT).show();
+        super.onDestroy();
     }
 }

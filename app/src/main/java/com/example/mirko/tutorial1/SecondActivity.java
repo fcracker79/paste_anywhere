@@ -1,10 +1,12 @@
 package com.example.mirko.tutorial1;
 
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "extraMessage";
@@ -38,5 +40,17 @@ public class SecondActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
+        Toast.makeText(this, "Second activity onCreate", Toast.LENGTH_SHORT).show();
+        super.onCreate(savedInstanceState, persistentState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Toast.makeText(this, "Second activity onDestroy", Toast.LENGTH_SHORT).show();;
+        super.onDestroy();
     }
 }
