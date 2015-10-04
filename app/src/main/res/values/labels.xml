@@ -8,4 +8,5 @@
     <string name="list_view">List view</string>
     <string name="grid_view">Grid view</string>
     <string name="spinner">Spinner</string>
+    <string name="showImplicitIntent">Apri intent implicito</string>
 </resources>
