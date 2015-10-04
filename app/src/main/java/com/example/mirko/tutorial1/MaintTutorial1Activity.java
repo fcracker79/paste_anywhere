@@ -1,5 +1,6 @@
 package com.example.mirko.tutorial1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateUtils;
@@ -52,6 +53,10 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                 DateUtils.formatDateTime(this, new Date().getTime(),
                         DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME)
         );
+    }
+
+    public void showSecondActivity(View v) {
+        startActivity(new Intent(this, SecondActivity.class));
     }
 
 }

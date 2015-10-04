@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mirko.tutorial1" >
 
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="false"
+        android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/mirkuccio"
@@ -16,14 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".SecondActivity"
+            android:label="@string/title_activity_second" >
+        </activity>
     </application>
 
-    <supports-screens
-        android:xlargeScreens="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:smallScreens="false"
-        />
-    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

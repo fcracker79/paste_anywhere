@@ -22,4 +22,12 @@
         android:layout_weight="1"
         android:layout_gravity="center_horizontal"
         style="@style/fancytext"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/showSecondActivity"
+        android:onClick="showSecondActivity"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:textAllCaps="false"/>
 </LinearLayout>
