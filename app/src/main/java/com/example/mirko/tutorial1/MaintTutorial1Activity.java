@@ -58,12 +58,17 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     }
 
     public void showSecondActivity(View v) {
-        startActivity(new Intent(this, SecondActivity.class));
+        final Intent intent = new Intent(this, SecondActivity.class);
+        final String message = getString(R.string.mostra_sgorbio);
+        intent.putExtra(SecondActivity.EXTRA_MESSAGE, message);
+        startActivity(intent);
     }
 
     public void showImplicitActivity(View v) {
         final String uri = ((EditText) findViewById(R.id.implicitActivityUri)).getText().toString();
 
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
+        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+
+        startActivity(intent);
     }
 }
