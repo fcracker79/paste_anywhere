@@ -20,6 +20,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
+        Toast.makeText(this, "Main activity onCreate", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -71,12 +72,6 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 
         startActivity(intent);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        Toast.makeText(this, "Main activity onCreate", Toast.LENGTH_SHORT).show();
-        super.onCreate(savedInstanceState, persistentState);
     }
 
     @Override

@@ -5,19 +5,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class SecondActivity extends AppCompatActivity {
+
+    private volatile int createCounter = 0;
+    private volatile int destroyCounter = 0;
+    private volatile int unoStatoACaso = 0;
     public static final String EXTRA_MESSAGE = "extraMessage";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         super.onCreate(savedInstanceState);
+
+        unoStatoACaso = 12345;
+
         setContentView(R.layout.activity_second);
 
         ((TextView) findViewById(R.id.secondActivityText)).setText(
                 getIntent().getStringExtra(EXTRA_MESSAGE)
         );
+
+        Toast.makeText(this,
+                String.format("Second activity onCreate: %d, uno stato a caso: %d",
+                        createCounter++,
+                        unoStatoACaso), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -43,14 +61,21 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        Toast.makeText(this, "Second activity onCreate", Toast.LENGTH_SHORT).show();
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onDestroy() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(this,
+                String.format("Second activity onDestroy: %d, uno stato a caso: %d",
+                        destroyCounter++,
+                        unoStatoACaso), Toast.LENGTH_SHORT).show();
+
+        super.onDestroy();
     }
 
-    @Override
-    protected void onDestroy() {
-        Toast.makeText(this, "Second activity onDestroy", Toast.LENGTH_SHORT).show();;
-        super.onDestroy();
+    public void onClickDie(View v) {
+        this.finish();
     }
 }

@@ -7,4 +7,5 @@
     <string name="menu_remove">Rimuovi</string>
     <string name="title_activity_second">SecondActivity</string>
     <string name="showSecondActivity">Mostra la seconda activity</string>
+    <string name="die">Muori!</string>
 </resources>
