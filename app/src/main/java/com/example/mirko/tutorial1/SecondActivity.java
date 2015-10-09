@@ -78,4 +78,16 @@ public class SecondActivity extends AppCompatActivity {
     public void onClickDie(View v) {
         this.finish();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "Second activity onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "Second activity onStop", Toast.LENGTH_SHORT).show();
+    }
 }

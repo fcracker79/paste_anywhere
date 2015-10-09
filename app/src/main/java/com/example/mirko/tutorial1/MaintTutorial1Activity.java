@@ -79,4 +79,16 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         Toast.makeText(this, "Main activity onDestroy", Toast.LENGTH_SHORT).show();
         super.onDestroy();
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Toast.makeText(this, "Main activity onStart", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Toast.makeText(this, "Main activity onStop", Toast.LENGTH_SHORT).show();
+    }
 }
