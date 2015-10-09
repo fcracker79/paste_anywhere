@@ -9,44 +9,9 @@
     android:layout_centerHorizontal="true"
     android:stretchColumns="1">
 
-    <TextView
-        android:id="@+id/dateTimeText"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"/>
-    <Button
+    <fragment
+        android:id="@+id/myFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/showDateTime"
-        android:onClick="onClickGetDateTime"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        style="@style/fancytext"/>
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/implicitActivityUri"
-            android:inputType="textUri"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
-        <Button
-            android:text="@string/showImplicitIntent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="showImplicitActivity"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/showSecondActivity"
-        android:onClick="showSecondActivity"
-        android:layout_weight="1"
-        android:layout_gravity="center_horizontal"
-        android:textAllCaps="false"/>
+        class="com.example.mirko.tutorial1.MyButton"/>
 </LinearLayout>
