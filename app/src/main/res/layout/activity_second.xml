@@ -8,9 +8,17 @@
 
     <TextView android:id="@+id/secondActivityText" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <Button android:onClick="onClickDie" android:text="@string/die"
+    <Button
+        android:id="@+id/dieButton"
+        android:onClick="onClickDie" android:text="@string/die"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/secondActivityText"/>
+
+    <Button android:onClick="onGoHome" android:text="@string/goHome"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/dieButton"/>
 </RelativeLayout>

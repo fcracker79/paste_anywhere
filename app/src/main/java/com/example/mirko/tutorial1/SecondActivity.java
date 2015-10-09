@@ -1,5 +1,6 @@
 package com.example.mirko.tutorial1;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,5 +90,11 @@ public class SecondActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Toast.makeText(this, "Second activity onStop", Toast.LENGTH_SHORT).show();
+    }
+
+    public void onGoHome(View v) {
+        final Intent i = new Intent(this, MaintTutorial1Activity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(i);
     }
 }
