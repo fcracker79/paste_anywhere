@@ -5,14 +5,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class MaintTutorial1Activity extends AppCompatActivity implements MyButton.OnFragmentInteractionListener {
+public class MaintTutorial1Activity extends AppCompatActivity implements MyButton.OnFragmentInteractionListener, ListOfElementsFragment.OnFragmentInteractionListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
-        Toast.makeText(this, "Main activity onCreate", Toast.LENGTH_SHORT).show();
+
+        final LinearLayout container = (LinearLayout) findViewById(R.id.containerForListFragment);
+        if (container.getChildCount() == 0) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.containerForListFragment, new ListOfElementsFragment())
+                    .commit();
+        }
     }
 
     @Override
@@ -29,6 +36,11 @@ public class MaintTutorial1Activity extends AppCompatActivity implements MyButto
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        Toast.makeText(this, String.format("onFragmentInteration %s", uri.toString()), Toast.LENGTH_SHORT);
+        Toast.makeText(this, String.format("onFragmentInteration(uri) %s", uri.toString()), Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+        Toast.makeText(this, String.format("onFragmentInteration(id) %s", id), Toast.LENGTH_SHORT);
     }
 }
