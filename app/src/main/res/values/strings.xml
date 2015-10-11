@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Prova fragments</string>
+    <string name="app_name">Prova ViewPager</string>
     <string name="action_settings">Settaggi</string>
 
 <!-- TODO: Remove or change this placeholder text -->

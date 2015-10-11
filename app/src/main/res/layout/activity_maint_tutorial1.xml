@@ -9,17 +9,5 @@
     android:layout_centerHorizontal="true"
     android:stretchColumns="1">
 
-    <fragment
-        android:id="@+id/myFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        class="com.example.mirko.tutorial1.MyButton"/>
 
-    <LinearLayout
-        android:id="@+id/containerForListFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    </LinearLayout>
 </LinearLayout>
