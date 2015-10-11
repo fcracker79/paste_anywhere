@@ -30,4 +30,9 @@ public class MyPageAdapter extends FragmentPagerAdapter {
                 throw new IllegalArgumentException("Unexpected " + position);
         }
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return "Pagina " + position;
+    }
 }
