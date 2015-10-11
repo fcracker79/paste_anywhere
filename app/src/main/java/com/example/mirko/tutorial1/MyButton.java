@@ -70,13 +70,6 @@ public class MyButton extends Fragment implements View.OnClickListener {
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -114,5 +107,8 @@ public class MyButton extends Fragment implements View.OnClickListener {
         this.image.setVisibility(
                 this.image.getVisibility() == View.INVISIBLE ? View.VISIBLE : View.INVISIBLE
         );
+        if (mListener != null) {
+            mListener.onFragmentInteraction(null);
+        }
     }
 }

@@ -65,7 +65,7 @@ public class ListOfElementsFragment extends Fragment implements AbsListView.OnIt
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
-
+        mListView.setOnItemClickListener(this);
         return view;
     }
 

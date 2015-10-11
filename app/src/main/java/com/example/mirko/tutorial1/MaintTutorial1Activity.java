@@ -36,11 +36,11 @@ public class MaintTutorial1Activity extends AppCompatActivity implements MyButto
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        Toast.makeText(this, String.format("onFragmentInteration(uri) %s", uri.toString()), Toast.LENGTH_SHORT);
+        Toast.makeText(this, String.format("onFragmentInteration(uri) %s", uri.toString()), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onFragmentInteraction(String id) {
-        Toast.makeText(this, String.format("onFragmentInteration(id) %s", id), Toast.LENGTH_SHORT);
+        Toast.makeText(this, String.format("onFragmentInteration(id) %s", id), Toast.LENGTH_SHORT).show();
     }
 }
