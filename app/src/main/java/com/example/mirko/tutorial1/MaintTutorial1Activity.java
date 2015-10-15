@@ -21,7 +21,7 @@ public class MaintTutorial1Activity extends AppCompatActivity implements ViewPag
 
         final ViewPager vp = (ViewPager) findViewById(R.id.myPager);
 
-        vp.setAdapter(new MyPageAdapter(getSupportFragmentManager()));
+        vp.setAdapter(new MyPageAdapter(getFragmentManager()));
         return true;
     }
 

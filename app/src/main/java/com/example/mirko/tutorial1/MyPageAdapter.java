@@ -1,8 +1,8 @@
 package com.example.mirko.tutorial1;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v13.app.FragmentPagerAdapter;
 
 /**
  * Created by mirko on 11/10/15.
