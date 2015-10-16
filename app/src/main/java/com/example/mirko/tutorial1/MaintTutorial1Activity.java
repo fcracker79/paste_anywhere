@@ -1,39 +1,37 @@
 package com.example.mirko.tutorial1;
 
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
-public class MaintTutorial1Activity extends AppCompatActivity implements ViewPagerFragment1.OnFragmentInteractionListener, ViewPagerFragment2.OnFragmentInteractionListener, ViewPagerFragment3.OnFragmentInteractionListener {
+public class MaintTutorial1Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
+
+        final LinearLayout l = (LinearLayout) findViewById(R.id.fragmentContent);
+        if (getFragmentManager().findFragmentByTag("ffffff") == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.fragmentContent, new BarFragment(), "ffffff")
+                    .commit();
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_maint_tutorial1, menu);
 
-        final ViewPager vp = (ViewPager) findViewById(R.id.myPager);
-
-        vp.setAdapter(new MyPageAdapter(getFragmentManager()));
         return true;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        Toast.makeText(MaintTutorial1Activity.this, "Cucu + " + uri, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
     }
+
 
 
 }

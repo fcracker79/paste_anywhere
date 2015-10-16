@@ -5,4 +5,7 @@
     <string name="hello_fragment1">Hello fragment 1</string>
     <string name="hello_fragment2">Hello fragment 2</string>
     <string name="hello_fragment3">Hello fragment 3</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
