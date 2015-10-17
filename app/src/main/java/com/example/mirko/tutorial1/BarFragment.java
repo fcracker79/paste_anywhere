@@ -1,26 +1,94 @@
 package com.example.mirko.tutorial1;
 
+import android.animation.ObjectAnimator;
 import android.app.Fragment;
-import android.os.AsyncTask;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import java.util.Random;
+import com.braintreepayments.api.dropin.BraintreePaymentActivity;
+import com.example.mirko.tutorial1.states.InitState;
+import com.example.mirko.tutorial1.states.PaymentOwner;
+import com.example.mirko.tutorial1.states.PaymentState;
 
 
-public class BarFragment extends Fragment {
-    private static final Random RND = new Random();
+public class BarFragment extends Fragment implements PaymentOwner {
+    private Button paymentButton;
 
-    private volatile ProgressBar pb;
+    private volatile PaymentState state;
+    private volatile String token;
+    private volatile String nonce;
+
+    @Override
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    @Override
+    public String getToken() {
+        return token;
+    }
+
+    @Override
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
+    @Override
+    public String getNonce() {
+        return nonce;
+    }
+
+    private String getStateName(PaymentState state) {
+        return state.getClass().getName().replaceAll(".*\\.", "");
+    }
+    @Override
+    public void setState(PaymentState newState) {
+        Log.i("STATES", String.format("Entering %s state", getStateName(newState)));
+        PaymentState previousState = null;
+        if (this.state != null) {
+            Log.i("STATES", String.format("Leaving %s state", getStateName(this.state)));
+            this.state.onExit(newState, this);
+            previousState = this.state;
+        }
+        this.state = newState;
+        newState.onEnter(previousState, this);
+
+        Log.i("STATES", String.format("Entered %s state", getStateName(newState)));
+    }
+
+    @Override
+    public void startPaymentActivity() {
+        Intent intent = new Intent(getActivity(), BraintreePaymentActivity.class);
+        intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN,
+                getToken());
+        startActivityForResult(intent, 100);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            if (resultCode == BraintreePaymentActivity.RESULT_OK) {
+                String paymentMethodNonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
+
+                this.state.nonceCreated(paymentMethodNonce, this);
+            }
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setRetainInstance(true);
+
+        this.setState(InitState.getInstance());
     }
 
     @Override
@@ -28,61 +96,37 @@ public class BarFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View result = inflater.inflate(R.layout.fragment_bar, container, false);
-        this.pb = (ProgressBar) result.findViewById(R.id.myProgressBar);
-        final Button e = (Button) result.findViewById(R.id.myEditText);
-        e.setOnClickListener(new View.OnClickListener() {
+        this.paymentButton = (Button) result.findViewById(R.id.myEditText);
+        this.paymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new SleepTask(BarFragment.this).execute();
+                BarFragment.this.state.onStartPayment(BarFragment.this);
             }
         });
 
         return result;
     }
 
-    private static class SleepTask extends AsyncTask<Void, Integer, Integer> {
-        private final BarFragment f;
+    @Override
+    public void paymentSuccessful(String details) {
+        Toast.makeText(
+                getActivity(),
+                String.format("Payment completed: %s!", details),
+                Toast.LENGTH_LONG)
+                .show();
+    }
 
-        public SleepTask(BarFragment f) {
-            this.f = f;
+    @Override
+    public void disableFurtherClicks() {
+        if (this.paymentButton != null) {
+            this.paymentButton.setEnabled(false);
         }
+    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            Toast.makeText(this.f.getActivity(), "On pre execute", Toast.LENGTH_SHORT)
-                    .show();
-
-            f.pb.setProgress(0);
-        }
-
-        @Override
-        protected Integer doInBackground(Void... params) {
-            for (int i = 1; i <= 3; i++) {
-                if (isCancelled()) {
-                    break;
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                publishProgress(i * 100 / 3);
-            }
-            return RND.nextInt();
-        }
-
-        @Override
-        protected void onProgressUpdate(Integer... values) {
-            super.onProgressUpdate(values);
-            f.pb.setProgress(values[0]);
-        }
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            Toast.makeText(this.f.getActivity(), "On post execute", Toast.LENGTH_SHORT)
-                    .show();
+    @Override
+    public void enableClick() {
+        if (this.paymentButton != null) {
+            this.paymentButton.setEnabled(true);
         }
     }
 }

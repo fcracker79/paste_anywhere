@@ -1,5 +1,6 @@
 package com.example.mirko.tutorial1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -31,7 +32,5 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
     }
-
-
 
 }

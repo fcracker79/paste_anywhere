@@ -6,17 +6,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
-        <ProgressBar
-            android:id="@+id/myProgressBar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:indeterminate="false"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            />
 
         <Button
             android:id="@+id/myEditText"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/start_payment"/>
     </LinearLayout>
 </FrameLayout>
