@@ -47,7 +47,9 @@ public class EventBusFragment extends Fragment {
             this.counter = 0;
         }
 
-        EventBus.getDefault().register(this.eventListener);
+        if (!EventBus.getDefault().hasSubscriberForEvent(RealWorldEvent.class)) {
+            EventBus.getDefault().register(this.eventListener);
+        }
     }
 
     @Override
