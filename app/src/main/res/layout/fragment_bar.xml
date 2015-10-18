@@ -16,7 +16,21 @@
 
         <Button
             android:id="@+id/myEditText"
+            android:text="@string/run_async_task"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/myDelayButton"
+            android:text="@string/activity_post_delay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/myDelayButtonOnRandomView"
+            android:text="@string/activity_post_delay_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </FrameLayout>

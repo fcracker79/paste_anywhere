@@ -1,6 +1,7 @@
 package com.example.mirko.tutorial1;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,6 +18,8 @@ public class BarFragment extends Fragment {
     private static final Random RND = new Random();
 
     private volatile ProgressBar pb;
+
+    private Runnable counterRunnable;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,38 @@ public class BarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 new SleepTask(BarFragment.this).execute();
+            }
+        });
+
+        final Button delayedActivityButton = (Button) result.findViewById(R.id.myDelayButton);
+
+        delayedActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getActivity(), DelayedActivity.class);
+
+                getActivity().startActivity(intent);
+            }
+        });
+
+        final Button delayedActivityButtonOnButton = (Button) result.findViewById(R.id.myDelayButtonOnRandomView);
+
+        this.counterRunnable = new Runnable() {
+            private int count = 0;
+
+            @Override
+            public void run() {
+                delayedActivityButtonOnButton.setText(getString(R.string.activity_post_delay_button) +
+                        String.format(" %d", count++));
+
+                delayedActivityButtonOnButton.postDelayed(this, 1000);
+            }
+        };
+
+        delayedActivityButtonOnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delayedActivityButtonOnButton.postDelayed(BarFragment.this.counterRunnable, 1000);
             }
         });
 

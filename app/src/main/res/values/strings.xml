@@ -6,6 +6,12 @@
     <string name="hello_fragment2">Hello fragment 2</string>
     <string name="hello_fragment3">Hello fragment 3</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="run_async_task">Run async task</string>
+    <string name="activity_post_delay">Run delayed activity</string>
+    <string name="activity_post_delay_button">Run delayed activity on button</string>
+    <string name="title_activity_delayed">DelayedActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
