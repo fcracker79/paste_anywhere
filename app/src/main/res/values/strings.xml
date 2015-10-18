@@ -12,6 +12,8 @@
     <string name="activity_post_delay">Run delayed activity</string>
     <string name="activity_post_delay_button">Run delayed activity on button</string>
     <string name="title_activity_delayed">DelayedActivity</string>
-
+    <string name="activity_event_bus_button">Run Event Bus activity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_event_bus">EventBusActivity</string>
+    <string name="send_message">Manda un messaggio</string>
 </resources>

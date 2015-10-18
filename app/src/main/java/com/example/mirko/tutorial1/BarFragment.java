@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -69,6 +70,15 @@ public class BarFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 delayedActivityButtonOnButton.postDelayed(BarFragment.this.counterRunnable, 1000);
+            }
+        });
+
+        final Button buttonEventBus = (Button) result.findViewById(R.id.myRunEventBusActivity);
+        buttonEventBus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(getActivity(), EventBusActivity.class);
+                getActivity().startActivity(intent);
             }
         });
 
