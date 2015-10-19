@@ -13,4 +13,6 @@ public interface PaymentOwner {
     void paymentSuccessful(String details);
     void disableFurtherClicks();
     void enableClick();
+    String getCustomerId();
+    void setCustomerId(String customerId);
 }

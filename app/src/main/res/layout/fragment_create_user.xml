@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/firstNameLabel"
+            android:text="@string/first_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:inputType="text"
+            android:id="@+id/firstNameValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+    </TableRow>
+
+    <TableRow android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/lastNameLabel"
+            android:text="@string/last_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:inputType="text"
+            android:id="@+id/lastNameValue"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <Button
+        android:id="@+id/createCustomerDialogButton"
+        android:text="@string/OK"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</GridLayout>

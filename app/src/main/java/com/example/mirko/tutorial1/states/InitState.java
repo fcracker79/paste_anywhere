@@ -3,6 +3,7 @@ package com.example.mirko.tutorial1.states;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;
@@ -32,11 +33,13 @@ public class InitState implements PaymentState {
 
     public void onStartPayment(final PaymentOwner owner) {
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format("%s/generate_token", HOST), new TextHttpResponseHandler() {
+        RequestParams params = new RequestParams();
+        params.put("customer_id", owner.getCustomerId());
+        client.post(String.format("%s/generate_token", HOST), params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.e("TOKEN", "Token FAILURE", throwable);
-                throw new RuntimeException(throwable);
+                // throw new RuntimeException(throwable);
             }
 
             @Override

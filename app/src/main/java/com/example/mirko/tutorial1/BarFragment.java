@@ -24,6 +24,17 @@ public class BarFragment extends Fragment implements PaymentOwner {
     private volatile PaymentState state;
     private volatile String token;
     private volatile String nonce;
+    private volatile String customerId;
+
+    @Override
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    @Override
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
 
     @Override
     public void setToken(String token) {
