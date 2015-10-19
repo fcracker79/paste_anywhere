@@ -1,6 +1,5 @@
 package com.example.mirko.tutorial1;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -16,10 +15,14 @@ import com.braintreepayments.api.dropin.BraintreePaymentActivity;
 import com.example.mirko.tutorial1.states.PaymentOwner;
 import com.example.mirko.tutorial1.states.PaymentState;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+import java.io.StringReader;
 import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
@@ -27,6 +30,8 @@ import cz.msebera.android.httpclient.Header;
 public class MaintTutorial1Activity extends AppCompatActivity implements CreateUserFragment.OnFragmentInteractionListener {
     private static final String TAG_PAYMENT_FRAGMENT = "paymentFragment";
     private static final String TAG_CREATE_USER_FRAGMENT = "createUserFragment";
+    private static final String TAG_SHOW_USER = "showUserFragment";
+
     private static final int INTENT_CHOOSE_PAYMENT = 11235;
 
     @Override
@@ -61,6 +66,7 @@ public class MaintTutorial1Activity extends AppCompatActivity implements CreateU
         ((PaymentOwner) getFragmentManager().findFragmentByTag(TAG_PAYMENT_FRAGMENT)).setCustomerId(customerId);
 
         findViewById(R.id.createPaymentMethodButton).setEnabled(true);
+        findViewById(R.id.showUserDetails).setEnabled(true);
     }
 
     public void onCreateCustomerButtonClicked(View createCustomerButton) {
@@ -99,6 +105,39 @@ public class MaintTutorial1Activity extends AppCompatActivity implements CreateU
         });
     }
 
+    public void onShowUserDetails(View v) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        final String customerId =
+                ((PaymentOwner) getFragmentManager().findFragmentByTag(TAG_PAYMENT_FRAGMENT)).getCustomerId();
+
+        client.get(String.format("%s/customers/%s", PaymentState.HOST, customerId), new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.e("TOKEN", "Token FAILURE", throwable);
+                // throw new RuntimeException(throwable);
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String jsonCustomer) {
+                final Gson gson = new Gson();
+                final JsonParser p = new JsonParser();
+                final JsonReader reader = new JsonReader(new StringReader(jsonCustomer));
+
+                JsonObject result = p.parse(reader).getAsJsonObject().getAsJsonObject("result");
+                final CustomerDetail customer = gson.fromJson(result, CustomerDetail.class);
+
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag(TAG_SHOW_USER);
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+
+                ShowUserDetailsFragment newFragment = ShowUserDetailsFragment.newInstance(customer);
+                newFragment.show(ft, TAG_SHOW_USER);
+            }
+        });
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

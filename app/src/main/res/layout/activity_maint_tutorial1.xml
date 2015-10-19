@@ -26,7 +26,15 @@
         android:id="@+id/createPaymentMethodButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_customer"
+        android:text="@string/create_payment_type"
         android:onClick="onCreatePaymentMethodButtonClicked"
+        android:enabled="false"/>
+
+    <Button
+        android:id="@+id/showUserDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_customer"
+        android:onClick="onShowUserDetails"
         android:enabled="false"/>
 </LinearLayout>

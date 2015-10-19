@@ -13,4 +13,6 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="OK">OK</string>
+    <string name="create_payment_type">Create payment type</string>
+    <string name="show_customer">Show customer</string>
 </resources>
