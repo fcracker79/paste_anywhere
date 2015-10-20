@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.braintreepayments.api.dropin.BraintreePaymentActivity;
@@ -141,7 +142,10 @@ public class MaintTutorial1Activity extends AppCompatActivity implements CreateU
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == INTENT_CHOOSE_PAYMENT) {
+
+        final boolean saveOnServer = ((CheckBox) findViewById(R.id.checkboxSaveToServer))
+                .isChecked();
+        if (requestCode == INTENT_CHOOSE_PAYMENT && saveOnServer) {
             final String nonce = data.getStringExtra(BraintreePaymentActivity.EXTRA_PAYMENT_METHOD_NONCE);
 
             AsyncHttpClient client = new AsyncHttpClient();
@@ -153,6 +157,7 @@ public class MaintTutorial1Activity extends AppCompatActivity implements CreateU
 
             client.post(
                     String.format("%s/customers/%s/payment_methods", PaymentState.HOST, customerId),
+                    params,
                     new TextHttpResponseHandler() {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

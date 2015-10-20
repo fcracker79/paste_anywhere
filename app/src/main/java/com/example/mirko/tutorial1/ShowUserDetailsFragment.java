@@ -76,7 +76,24 @@ public class ShowUserDetailsFragment extends DialogFragment {
 
         @Override
         public Object getItem(int position) {
-            return null; // boh
+            final int elementPosition = position / 5;
+            final CustomerDetail.CreditCard creditCard = creditCards.get(elementPosition);
+            final int fieldPosition = position % 5;
+
+            switch(fieldPosition) {
+                case 0:
+                    return creditCard.isDefaultCard();
+                case 1:
+                    return creditCard.getCardType();
+                case 2:
+                    return creditCard.getExpiration();
+                case 3:
+                    return creditCard.getToken();
+                case 4:
+                    return creditCard.getImageUrl();
+                default:
+                    throw new IllegalArgumentException();
+            }
         }
 
         @Override

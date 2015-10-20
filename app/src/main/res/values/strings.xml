@@ -15,4 +15,5 @@
     <string name="OK">OK</string>
     <string name="create_payment_type">Create payment type</string>
     <string name="show_customer">Show customer</string>
+    <string name="save_payment_method_on_server">Save the payment method on the server</string>
 </resources>

@@ -30,6 +30,12 @@
         android:onClick="onCreatePaymentMethodButtonClicked"
         android:enabled="false"/>
 
+    <CheckBox
+        android:text="@string/save_payment_method_on_server"
+        android:id="@+id/checkboxSaveToServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"/>
     <Button
         android:id="@+id/showUserDetails"
         android:layout_width="wrap_content"
