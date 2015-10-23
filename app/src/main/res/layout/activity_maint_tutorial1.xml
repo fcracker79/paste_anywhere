@@ -9,38 +9,4 @@
     android:layout_centerHorizontal="true"
     android:stretchColumns="1">
 
-    <LinearLayout
-        android:id="@+id/fragmentContent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"/>
-
-    <Button
-        android:id="@+id/createCustomerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_customer"
-        android:onClick="onCreateCustomerButtonClicked"/>
-
-    <Button
-        android:id="@+id/createPaymentMethodButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create_payment_type"
-        android:onClick="onCreatePaymentMethodButtonClicked"
-        android:enabled="false"/>
-
-    <CheckBox
-        android:text="@string/save_payment_method_on_server"
-        android:id="@+id/checkboxSaveToServer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"/>
-    <Button
-        android:id="@+id/showUserDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/show_customer"
-        android:onClick="onShowUserDetails"
-        android:enabled="false"/>
 </LinearLayout>

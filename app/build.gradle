@@ -34,6 +34,5 @@ dependencies {
     compile 'com.commonsware.cwac:security:0.5.2'
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.android.support:support-v13:23.0.1'
-    compile 'com.braintreepayments.api:braintree:1.+'
     compile 'com.loopj.android:android-async-http:1.4.9'
 }
