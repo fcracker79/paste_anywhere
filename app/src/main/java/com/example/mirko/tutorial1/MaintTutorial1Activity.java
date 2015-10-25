@@ -1,5 +1,6 @@
 package com.example.mirko.tutorial1;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,11 +14,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +102,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                         content.append(s).append("\n");
                     }
                     Toast.makeText(MaintTutorial1Activity.this, content, Toast.LENGTH_LONG).show();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     Toast.makeText(
                             MaintTutorial1Activity.this,
                             String.format("Error opening %s: %s", fullPathName, e.getMessage()),
@@ -113,6 +118,10 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                 }
             }
         });
+
+        sb = new StringBuilder();
+        sb.append(String.format("External storage: %s", getExternalFilesDir(null)));
+        ((TextView) findViewById(R.id.externalStorageText)).setText(sb);
     }
 
     @Override
@@ -127,4 +136,77 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         return true;
     }
 
+    public void onClickReadExternal(View v) {
+        final Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                InputStream is = null;
+
+                final File externalStorage = getExternalFilesDir(null);
+                final File fileExternalStorage = new File(externalStorage.toString(), "pippo.txt");
+
+                try {
+                    is = new FileInputStream(fileExternalStorage);
+                    final BufferedReader r = new BufferedReader(new InputStreamReader(is));
+
+                    final StringBuilder sb = new StringBuilder();
+
+                    for (String s = r.readLine(); s != null; s = r.readLine()) {
+                        sb.append(s).append("\n");
+                    }
+
+                    Toast.makeText(MaintTutorial1Activity.this, sb, Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    throw new IllegalStateException(e);
+                } finally {
+                    if (is != null) {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            Log.e("Mah", e.getMessage(), e);
+                        }
+                    }
+                }
+            }
+        };
+
+        runOnUiThread(r);
+    }
+
+    public void onClickWriteExternal(View v) {
+        final File externalStorage = getExternalFilesDir(null);
+        final File fileExternalStorage = new File(externalStorage.toString(), "pippo.txt");
+
+        final AsyncTask<String, Void, Boolean> myTask =
+                new AsyncTask<String, Void, Boolean>() {
+                    @Override
+                    protected Boolean doInBackground(String... params) {
+                        for (String file : params) {
+
+                            OutputStream os = null;
+                            try {
+                                os = new FileOutputStream(file, false);
+                                final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(os));
+                                w.write("Lorem ipsum dolet\n");
+                                w.write("Sic amet e poi boh non me lo ricordo più\n");
+                                w.flush();
+                            } catch (IOException e) {
+                                return false;
+                            } finally {
+                                if (os != null) {
+                                    try {
+                                        os.close();
+                                    } catch (IOException e) {
+                                        Log.e("Boh?", e.getMessage(), e);
+                                    }
+                                }
+                            }
+                        }
+
+                        return true;
+                    }
+                };
+        myTask.execute(fileExternalStorage.toString());
+
+    }
 }

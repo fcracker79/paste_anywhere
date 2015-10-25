@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Prova BrainTree</string>
+    <string name="app_name">Prova Storage</string>
     <string name="action_settings">Settaggi</string>
 
     <string name="hello_fragment1">Hello fragment 1</string>
     <string name="hello_fragment2">Hello fragment 2</string>
     <string name="hello_fragment3">Hello fragment 3</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="start_payment">Start payment</string>
     <string name="create_customer">Create payment customer</string>
@@ -16,4 +15,6 @@
     <string name="create_payment_type">Create payment type</string>
     <string name="show_customer">Show customer</string>
     <string name="save_payment_method_on_server">Save the payment method on the server</string>
+    <string name="save_stuff_in_external_storage">Save stuff in external storage</string>
+    <string name="get_stuff_from_external_storage">Get stuff from external storage</string>
 </resources>

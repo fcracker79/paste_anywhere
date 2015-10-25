@@ -16,6 +16,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <TextView android:id="@+id/externalStorageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_stuff_in_external_storage"
+        android:onClick="onClickWriteExternal"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_stuff_from_external_storage"
+        android:onClick="onClickReadExternal"/>
+
     <GridView
         android:id="@+id/fileListView"
         android:layout_width="wrap_content"
