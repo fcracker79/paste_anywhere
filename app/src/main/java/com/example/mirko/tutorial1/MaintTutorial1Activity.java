@@ -2,6 +2,7 @@ package com.example.mirko.tutorial1;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,19 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
+
+        StrictMode.ThreadPolicy.Builder b = new StrictMode.ThreadPolicy.Builder();
+        StrictMode.VmPolicy.Builder vb = new StrictMode.VmPolicy.Builder();
+        if (BuildConfig.DEBUG) {
+            b.detectAll().penaltyDeath();
+            vb.detectAll().penaltyDeath();
+        }
+        else {
+            b.detectAll().penaltyLog();
+            vb.detectAll().penaltyLog();
+        }
+        StrictMode.setThreadPolicy(b.build());
+        StrictMode.setVmPolicy(vb.build());
 
         InputStream is = null;
         try {
@@ -89,39 +102,47 @@ public class MaintTutorial1Activity extends AppCompatActivity {
 
                 final String fullPathName = new File(dir.toString(), filename).toString();
 
-                final StringBuilder content = new StringBuilder();
+                final StringBuilder sb = new StringBuilder();
+                sb.append(String.format("External storage: %s", getExternalFilesDir(null)));
 
-                InputStream is = null;
+                final AsyncTask<Void, Void, String> myTask = new AsyncTask<Void, Void, String>() {
+                    @Override
+                    protected String doInBackground(Void... params) {
+                        final StringBuilder content = new StringBuilder();
+                        InputStream is = null;
 
-                try {
-                    is = new FileInputStream(fullPathName);
-                    final BufferedReader r = new BufferedReader(
-                            new InputStreamReader(is)
-                    );
-                    for (String s = r.readLine(); s != null; s = r.readLine()) {
-                        content.append(s).append("\n");
-                    }
-                    Toast.makeText(MaintTutorial1Activity.this, content, Toast.LENGTH_LONG).show();
-                } catch (IOException e) {
-                    Toast.makeText(
-                            MaintTutorial1Activity.this,
-                            String.format("Error opening %s: %s", fullPathName, e.getMessage()),
-                            Toast.LENGTH_LONG).show();
-                } finally {
-                    if (is != null) {
                         try {
-                            is.close();
+                            is = new FileInputStream(fullPathName);
+                            final BufferedReader r = new BufferedReader(
+                                    new InputStreamReader(is)
+                            );
+                            for (String s = r.readLine(); s != null; s = r.readLine()) {
+                                content.append(s).append("\n");
+                            }
+                            return content.toString();
                         } catch (IOException e) {
-                            Log.e("Boh", e.getMessage(), e);
+                            return String.format("Error opening %s: %s", fullPathName, e.getMessage());
+                        } finally {
+                            if (is != null) {
+                                try {
+                                    is.close();
+                                } catch (IOException e) {
+                                    Log.e("Boh", e.getMessage(), e);
+                                }
+                            }
                         }
                     }
-                }
+
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        Toast.makeText(MaintTutorial1Activity.this, s, Toast.LENGTH_LONG).show();
+                    }
+                };
+
+                myTask.execute();
             }
         });
-
-        sb = new StringBuilder();
-        sb.append(String.format("External storage: %s", getExternalFilesDir(null)));
-        ((TextView) findViewById(R.id.externalStorageText)).setText(sb);
     }
 
     @Override
@@ -137,9 +158,9 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     }
 
     public void onClickReadExternal(View v) {
-        final Runnable r = new Runnable() {
+        final AsyncTask<String, Void, String> myTask = new AsyncTask<String, Void, String>() {
             @Override
-            public void run() {
+            protected String doInBackground(String... params) {
                 InputStream is = null;
 
                 final File externalStorage = getExternalFilesDir(null);
@@ -155,7 +176,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                         sb.append(s).append("\n");
                     }
 
-                    Toast.makeText(MaintTutorial1Activity.this, sb, Toast.LENGTH_SHORT).show();
+                    return sb.toString();
                 } catch (IOException e) {
                     throw new IllegalStateException(e);
                 } finally {
@@ -168,9 +189,15 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                     }
                 }
             }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                Toast.makeText(MaintTutorial1Activity.this, s, Toast.LENGTH_SHORT).show();
+            }
         };
 
-        runOnUiThread(r);
+        myTask.execute();
     }
 
     public void onClickWriteExternal(View v) {
@@ -183,13 +210,14 @@ public class MaintTutorial1Activity extends AppCompatActivity {
                     protected Boolean doInBackground(String... params) {
                         for (String file : params) {
 
-                            OutputStream os = null;
+                            FileOutputStream os = null;
                             try {
                                 os = new FileOutputStream(file, false);
                                 final BufferedWriter w = new BufferedWriter(new OutputStreamWriter(os));
                                 w.write("Lorem ipsum dolet\n");
                                 w.write("Sic amet e poi boh non me lo ricordo più\n");
                                 w.flush();
+                                os.getFD().sync();
                             } catch (IOException e) {
                                 return false;
                             } finally {
