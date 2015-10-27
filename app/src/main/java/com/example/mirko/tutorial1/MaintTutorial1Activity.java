@@ -11,6 +11,15 @@ public class MaintTutorial1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maint_tutorial1);
+
+        if (getFragmentManager().findFragmentById(android.R.id.content)==null) {
+            getFragmentManager().beginTransaction()
+                    .add(android.R.id.content,
+                            ShowDBDataFragment.newInstance())
+                    .addToBackStack("settings")
+                    .commit();
+        }
+
     }
 
     @Override
