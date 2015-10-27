@@ -34,4 +34,13 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryAt(0)
+            .getName().equals("settings")) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
