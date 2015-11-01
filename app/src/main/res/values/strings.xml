@@ -1,27 +1,5 @@
 <resources>
-    <string name="app_name">Prova Preferences</string>
-    <string name="action_settings">Settaggi</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="pref1summary">pref1summary</string>
-    <string name="pref1title">pref1title</string>
-    <string name="pref2summary">pref2summary</string>
-    <string name="pref2title">pref2title</string>
-    <string name="pref3summary">pref3summary</string>
-    <string name="pref3title">pref3title</string>
-    <string name="pref4summary">pref4summary</string>
-    <string name="pref4title">pref4title</string>
-    <string name="dialogtitle">dialogtitle</string>
-    <string name="listdialogtitle">listdialogtitle</string>
-    <string-array name="cities">
-        <item>London</item>
-        <item>Paris</item>
-        <item>Massacciuccoli</item>
-    </string-array>
-    <string-array name="airport_codes">
-        <item>AIRPORT_LONDON</item>
-        <item>AIRPORT_PARIS</item>
-        <item>AIRPORT_MASSACCIUCCOLI</item>
-    </string-array>
+    <string name="app_name">Shared Clipboard</string>
+    <string name="choose_name_sandbox">Choose a name for your sandbox</string>
+    <string name="create_your_sandbox">Create your sandbox!</string>
 </resources>

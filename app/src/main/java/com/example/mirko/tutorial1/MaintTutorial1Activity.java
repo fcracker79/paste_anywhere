@@ -15,7 +15,7 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         if (getFragmentManager().findFragmentById(android.R.id.content)==null) {
             getFragmentManager().beginTransaction()
                     .add(android.R.id.content,
-                            ShowDBDataFragment.newInstance())
+                            SharedClipboardFragment.newInstance())
                     .addToBackStack("settings")
                     .commit();
         }
@@ -31,25 +31,6 @@ public class MaintTutorial1Activity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_settings) {
-            if (getFragmentManager().findFragmentById(android.R.id.content)==null) {
-                getFragmentManager().beginTransaction()
-                        .add(android.R.id.content,
-                                MyPrefFragment.newInstance())
-                        .addToBackStack("settings")
-                        .commit();
-            }
-        }
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryAt(0)
-            .getName().equals("settings")) {
-            getFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
-        }
     }
 }
