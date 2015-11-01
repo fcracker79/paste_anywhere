@@ -47,6 +47,8 @@
         android:singleLine="false"
         android:layout_below="@id/text_view_hyperlink"
         android:enabled="false"
-        android:background="#c1c1c1" />
+        android:background="@drawable/sandbox_shape"
+        android:gravity="top"
+        android:layout_margin="10dp"/>
 
 </RelativeLayout>
