@@ -35,12 +35,8 @@ public class SandboxInSyncState implements SandboxState {
     }
 
     @Override
-    public void sandboxValueChanged(SandboxStateOwner owner) {
-        throw new IllegalStateException();
-    }
-
-    @Override
-    public void sandboxNameChanged(SandboxStateOwner owner) {
+    public void sandboxValueChanged(final SandboxStateOwner owner) {
+        owner.startProgress();
         owner.getSandboxRepository().postData(
                 owner.getUid(),
                 owner.getSandboxValue(),
@@ -49,13 +45,20 @@ public class SandboxInSyncState implements SandboxState {
                     public void onDataSaveFailed(int statusCode, Throwable cause) {
                         // FIXME error handling
                         Log.e("NETWORK", cause.getMessage(), cause);
+                        owner.endProgress();
                     }
 
                     @Override
                     public void onDataSaved() {
+                        owner.endProgress();
                         // Nothing to do for now
                     }
                 }
         );
+    }
+
+    @Override
+    public void sandboxNameChanged(SandboxStateOwner owner) {
+        throw new IllegalStateException();
     }
 }

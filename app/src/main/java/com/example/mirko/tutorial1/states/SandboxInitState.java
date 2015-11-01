@@ -16,6 +16,7 @@ public class SandboxInitState implements SandboxState {
         owner.setEnableCreateButton(false);
         owner.setEnableSandboxValue(false);
         owner.endProgress();
+        owner.setSandboxData(null, null);
     }
 
     @Override
@@ -25,18 +26,21 @@ public class SandboxInitState implements SandboxState {
 
     @Override
     public void createClicked(final SandboxStateOwner owner) {
+        owner.startProgress();
         owner.getSandboxRepository().create(
                 new SandboxRepository.SandboxCreationEventListener() {
                     @Override
                     public void onSandboxCreationFailed(int statusCode, Throwable cause) {
                         // FIXME Error handling
                         Log.e("NETWORK", cause.getMessage(), cause);
+                        owner.endProgress();
                     }
 
                     @Override
                     public void onSandboxCreated(String uri, String uid) {
                         owner.setSandboxData(uri, uid);
                         owner.setState(SandboxInSyncState.instance());
+                        owner.endProgress();
                     }
                 }
         );

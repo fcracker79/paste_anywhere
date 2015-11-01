@@ -60,6 +60,12 @@ public class SandboxRepository {
     public void create(final SandboxCreationEventListener l) {
         final RequestParams p = new RequestParams();
         client.post(ctx, SERVER_NAME, p, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                l.onSandboxCreationFailed(statusCode, throwable);
+            }
+
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 l.onSandboxCreationFailed(statusCode, throwable);

@@ -46,6 +46,7 @@
         android:layout_height="fill_parent"
         android:singleLine="false"
         android:layout_below="@id/text_view_hyperlink"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:background="#c1c1c1" />
 
 </RelativeLayout>
