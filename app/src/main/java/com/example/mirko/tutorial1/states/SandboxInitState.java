@@ -28,6 +28,7 @@ public class SandboxInitState implements SandboxState {
     public void createClicked(final SandboxStateOwner owner) {
         owner.startProgress();
         owner.getSandboxRepository().create(
+                owner.getToken(),
                 new SandboxRepository.SandboxCreationEventListener() {
                     @Override
                     public void onSandboxCreationFailed(int statusCode, Throwable cause) {

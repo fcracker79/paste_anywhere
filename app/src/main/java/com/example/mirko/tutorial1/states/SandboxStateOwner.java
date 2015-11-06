@@ -16,4 +16,5 @@ public interface SandboxStateOwner {
     void setSandboxData(String uri, String uid);
     void startProgress();
     void endProgress();
+    CharSequence getToken();
 }

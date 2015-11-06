@@ -9,8 +9,6 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Map;
-
 import cz.msebera.android.httpclient.Header;
 
 public class SandboxRepository {
@@ -57,8 +55,10 @@ public class SandboxRepository {
         });
     }
 
-    public void create(final SandboxCreationEventListener l) {
+    public void create(CharSequence token, final SandboxCreationEventListener l) {
         final RequestParams p = new RequestParams();
+        p.put("token", token);
+
         client.post(ctx, SERVER_NAME, p, new JsonHttpResponseHandler() {
 
             @Override

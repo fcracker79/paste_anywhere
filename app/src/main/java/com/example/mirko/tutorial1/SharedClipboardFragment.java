@@ -28,6 +28,7 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     private volatile ProgressBar mProgressBar;
     private volatile TextView mHyperlink;
     private volatile Context ctx;
+
     public static SharedClipboardFragment newInstance() {
         return new SharedClipboardFragment();
     }
@@ -175,5 +176,10 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     @Override
     public String getUid() {
         return uid;
+    }
+
+    @Override
+    public CharSequence getToken() {
+        return mSandboxName.getText();
     }
 }
