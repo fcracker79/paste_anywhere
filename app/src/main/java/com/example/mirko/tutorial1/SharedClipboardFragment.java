@@ -130,6 +130,8 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     public void setEnableSandboxValue(boolean enable) {
         this.mSandbox.setVisibility(enable ? View.VISIBLE : View.GONE);
         this.mSandbox.setEnabled(enable);
+        this.mHyperlink.setVisibility(enable ? View.VISIBLE : View.GONE);
+        this.mHyperlink.setEnabled(enable);
     }
 
     @Override
