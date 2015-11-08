@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_centerHorizontal="true"
         android:id="@+id/layout_sandbox_name">
         <EditText
             android:id="@+id/edit_text_sandbox_name"
@@ -39,6 +40,8 @@
         style="@style/createSandboxButton"/>
 
     <TextView android:id="@+id/text_view_hyperlink"
+        android:autoLink="web"
+        android:linksClickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"

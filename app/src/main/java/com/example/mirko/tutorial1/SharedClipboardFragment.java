@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -103,6 +104,7 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         this.mProgressBar = (ProgressBar) v.findViewById(R.id.progress_loading);
 
         this.mHyperlink = (TextView) v.findViewById(R.id.text_view_hyperlink);
+        this.mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
         this.setState(SandboxInitState.instance());
 
