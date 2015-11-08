@@ -6,4 +6,11 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_choose_what_to_do">ChooseWhatToDoActivity</string>
+    <string name="copy_and_paste">Copy and paste!</string>
+    <string name="rate">Rate the app</string>
+    <string name="credits">Credits</string>
+    <string name="credits_content">Lorem ipsum dolet\nBla bla bla\nCredit contents</string>
+
+    <string name="OK">OK</string>
 </resources>

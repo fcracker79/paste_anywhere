@@ -26,11 +26,20 @@
         <item name="android:background">#64B5F6</item>
     </style>
 
+    <style name="chooseScreen" parent="AppTheme">
+        <item name="android:background">#64B5F6</item>
+    </style>
+
     <style name="sandboxScreen" parent="AppTheme">
         <item name="android:background">#64B5F6</item>
     </style>
 
     <style name="createSandboxButton" parent="AppTheme">
+        <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="chooseButton" parent="AppTheme">
         <item name="android:background">@drawable/rounded_button</item>
         <item name="android:padding">10dp</item>
     </style>

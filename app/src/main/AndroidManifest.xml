@@ -24,12 +24,15 @@
             android:name=".SplashActivity"
             android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".ChooseWhatToDoActivity"
+            android:label="@string/title_activity_choose_what_to_do" >
         </activity>
     </application>
 
