@@ -2,4 +2,8 @@
     <string name="app_name">Shared Clipboard</string>
     <string name="choose_name_sandbox">Choose a name for your sandbox</string>
     <string name="create_your_sandbox">Create your sandbox!</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>

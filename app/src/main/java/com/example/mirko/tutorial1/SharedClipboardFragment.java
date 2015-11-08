@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -126,7 +127,7 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
 
     @Override
     public void setEnableSandboxValue(boolean enable) {
-        this.mSandbox.setEnabled(enable);
+        this.mSandbox.setVisibility(enable ? View.VISIBLE : View.GONE);
     }
 
     @Override

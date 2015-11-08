@@ -13,18 +13,14 @@
         android:max="100"
         android:indeterminate="false"/>
 
-    <TextView
-        android:id="@+id/text_view_choose_name_sandbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choose_name_sandbox" />
-
     <EditText
         android:id="@+id/edit_text_sandbox_name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:layout_below="@id/text_view_choose_name_sandbox"/>
+        android:layout_alignParentTop="true"
+        android:hint="@string/choose_name_sandbox"
+        style="@style/inputField"/>
 
     <Button
         android:id="@+id/button_attach_sandbox"
@@ -32,12 +28,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_text_sandbox_name"
         android:text="@string/create_your_sandbox"
-        android:enabled="false"/>
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        style="@style/createSandboxButton"/>
 
     <TextView android:id="@+id/text_view_hyperlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:visibility="gone"
         android:layout_below="@id/button_attach_sandbox"/>
     <EditText
         android:id="@+id/edit_text_sandbox"
@@ -49,6 +48,7 @@
         android:enabled="false"
         android:background="@drawable/sandbox_shape"
         android:gravity="top"
+        android:visibility="gone"
         android:layout_margin="10dp"/>
 
 </RelativeLayout>
