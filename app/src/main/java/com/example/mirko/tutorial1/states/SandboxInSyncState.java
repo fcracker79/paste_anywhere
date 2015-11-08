@@ -22,6 +22,7 @@ public class SandboxInSyncState implements SandboxState {
     public void onEnter(SandboxStateOwner owner, SandboxState previous) {
         owner.setEnableCreateButton(false);
         owner.setEnableSandboxValue(true);
+        owner.setEnableSandboxName(false);
     }
 
     @Override

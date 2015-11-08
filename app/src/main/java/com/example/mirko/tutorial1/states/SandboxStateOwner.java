@@ -9,6 +9,7 @@ public interface SandboxStateOwner {
     void setState(SandboxState state);
     void setEnableCreateButton(boolean enable);
     void setEnableSandboxValue(boolean enable);
+    void setEnableSandboxName(boolean enable);
     CharSequence getSandboxValue();
     CharSequence getSandboxName();
     SandboxRepository getSandboxRepository();

@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class SandboxRepository {
-    private static final String SERVER_NAME = "http://192.168.56.1:5000/sandbox";
+    private static final String SERVER_NAME = "http://192.168.122.1:5000/sandbox";
 
     private final Context ctx;
     private final AsyncHttpClient client = new AsyncHttpClient();

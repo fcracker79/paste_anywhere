@@ -15,6 +15,7 @@ public class SandboxInitState implements SandboxState {
     public void onEnter(SandboxStateOwner owner, SandboxState previous) {
         owner.setEnableCreateButton(false);
         owner.setEnableSandboxValue(false);
+        owner.setEnableSandboxName(true);
         owner.endProgress();
         owner.setSandboxData(null, null);
     }

@@ -122,12 +122,14 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
 
     @Override
     public void setEnableCreateButton(boolean enable) {
+        this.mCreateButton.setVisibility(enable ? View.VISIBLE : View.GONE);
         this.mCreateButton.setEnabled(enable);
     }
 
     @Override
     public void setEnableSandboxValue(boolean enable) {
         this.mSandbox.setVisibility(enable ? View.VISIBLE : View.GONE);
+        this.mSandbox.setEnabled(enable);
     }
 
     @Override
@@ -182,5 +184,10 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     @Override
     public CharSequence getToken() {
         return mSandboxName.getText();
+    }
+
+    @Override
+    public void setEnableSandboxName(boolean enable) {
+        this.mSandboxName.setEnabled(enable);
     }
 }
