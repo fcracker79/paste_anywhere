@@ -41,5 +41,7 @@
 
     <style name="sandbox" parent="AppTheme">
         <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 </resources>

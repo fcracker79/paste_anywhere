@@ -49,6 +49,6 @@
         android:background="@drawable/sandbox_shape"
         android:gravity="top"
         android:visibility="gone"
-        android:layout_margin="10dp"/>
+        style="@style/sandbox"/>
 
 </RelativeLayout>
