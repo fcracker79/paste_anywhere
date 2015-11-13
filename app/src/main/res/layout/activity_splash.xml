@@ -14,4 +14,11 @@
         android:layout_gravity="center"/>
 -->
 
+    <TextView
+        android:id="@+id/splashTextView"
+        style="@style/splashStringText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

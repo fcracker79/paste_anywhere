@@ -50,4 +50,9 @@
         <item name="android:padding">10dp</item>
         <item name="android:layout_margin">10dp</item>
     </style>
+
+    <style name="splashStringText" parent="AppTheme">
+        <item name="android:textSize">20dp</item>
+        <item name="android:color">#FFCCBC</item>
+    </style>
 </resources>
