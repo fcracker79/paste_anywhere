@@ -1,8 +1,12 @@
 package com.example.mirko.tutorial1;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.util.Log;
+
+import java.lang.reflect.Field;
 
 public class MyApplication extends Application implements Thread.UncaughtExceptionHandler {
 
@@ -19,8 +23,30 @@ public class MyApplication extends Application implements Thread.UncaughtExcepti
     @Override
     public void onCreate() {
         super.onCreate();
+
+        setDefaultFont(this, "SERIF", "fonts/roof-runners-active.bold.ttf");
     }
 
+    private static void setDefaultFont(Context context,
+                                      String staticTypefaceFieldName, String fontAssetName) {
+        final Typeface regular = Typeface.createFromAsset(context.getAssets(),
+                fontAssetName);
+        replaceFont(staticTypefaceFieldName, regular);
+    }
+
+    private static void replaceFont(String staticTypefaceFieldName,
+                                      final Typeface newTypeface) {
+        try {
+            final Field staticField = Typeface.class
+                    .getDeclaredField(staticTypefaceFieldName);
+            staticField.setAccessible(true);
+            staticField.set(null, newTypeface);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        } catch(NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @Override
     public void onLowMemory() {
         super.onLowMemory();
