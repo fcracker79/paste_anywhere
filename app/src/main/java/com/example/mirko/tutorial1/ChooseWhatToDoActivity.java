@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 public class ChooseWhatToDoActivity extends AppCompatActivity {
 
@@ -21,6 +23,9 @@ public class ChooseWhatToDoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_what_to_do);
+
+        ((TextView) findViewById(R.id.splashTextViewOnChooseWhatToDo))
+                .setText(Html.fromHtml(getString(R.string.splash_title)));
     }
 
     @Override

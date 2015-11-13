@@ -4,47 +4,35 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context="com.example.mirko.tutorial1.ChooseWhatToDoActivity"
     style="@style/chooseScreen">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/splashTextViewOnChooseWhatToDo"
+        style="@style/splashStringText"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
-        <Button android:id="@+id/open_my_sandbox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickOpenSandbox"
-            android:text="@string/copy_and_paste"
-            android:layout_weight="1"
-            style="@style/chooseButton"/>
-    </LinearLayout>
+        android:layout_marginBottom="40dp"/>
 
-    <LinearLayout
+    <Button android:id="@+id/open_my_sandbox"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
-        <Button android:id="@+id/rate_app"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickRate"
-            android:layout_weight="1"
-            android:text="@string/rate"
-            style="@style/chooseButton"/>
-    </LinearLayout>
+        android:onClick="onClickOpenSandbox"
+        android:text="@string/copy_and_paste"
+        style="@style/chooseButton"/>
 
-    <LinearLayout
+    <Button android:id="@+id/rate_app"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1">
-        <Button android:id="@+id/credits_app"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:onClick="onClickCredits"
-            android:text="@string/credits"
-            android:layout_weight="1"
-            style="@style/chooseButton"/>
-    </LinearLayout>
+        android:onClick="onClickRate"
+        android:text="@string/rate"
+        style="@style/chooseButton"/>
+
+    <Button android:id="@+id/credits_app"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCredits"
+        android:text="@string/credits"
+        style="@style/chooseButton"/>
 </LinearLayout>

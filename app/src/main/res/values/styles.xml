@@ -15,7 +15,7 @@
     </style>
 
     <style name="splashScreen" parent="AppTheme">
-        <item name="android:background">#EF9A9A</item>
+        <item name="android:background">@drawable/background</item>
     </style>
 
     <style name="chooseScreen" parent="AppTheme">
@@ -44,6 +44,7 @@
         <item name="android:background">@android:drawable/dialog_holo_light_frame</item>
         <item name="android:padding">10dp</item>
         <item name="android:layout_margin">10dp</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="sandboxHyperlink" parent="AppTheme">
@@ -52,7 +53,12 @@
     </style>
 
     <style name="splashStringText" parent="AppTheme">
-        <item name="android:textSize">20dp</item>
-        <item name="android:color">#FFCCBC</item>
+        <item name="android:textSize">60sp</item>
+        <item name="android:textColor">#F44336</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">1</item>
     </style>
 </resources>
