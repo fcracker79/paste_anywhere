@@ -60,6 +60,8 @@ public class SandboxInSyncState implements SandboxState {
 
     @Override
     public void sandboxNameChanged(SandboxStateOwner owner) {
-        throw new IllegalStateException();
+        // This may happen when restoring the state.
+        // Best is not to do anything
+        // throw new IllegalStateException();
     }
 }

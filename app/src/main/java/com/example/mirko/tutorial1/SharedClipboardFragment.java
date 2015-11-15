@@ -48,6 +48,7 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setRetainInstance(true);
         final View v = inflater.inflate(R.layout.fragment_shared_clipboard, container, false);
 
         /*
@@ -106,7 +107,12 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         this.mHyperlink = (TextView) v.findViewById(R.id.text_view_hyperlink);
         this.mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
-        this.setState(SandboxInitState.instance());
+        if (this.state != null) {
+            // Refresh the current state
+            this.setState(this.state);
+        } else {
+            this.setState(SandboxInitState.instance());
+        }
 
         return v;
     }
