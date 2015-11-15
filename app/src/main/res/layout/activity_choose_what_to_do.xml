@@ -22,6 +22,13 @@
         android:text="@string/copy_and_paste"
         style="@style/chooseButton"/>
 
+    <Button android:id="@+id/reopen_my_sandbox"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickReopenSandbox"
+        android:text="@string/reopen_copy_and_paste"
+        style="@style/chooseButton"/>
+
     <Button android:id="@+id/rate_app"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

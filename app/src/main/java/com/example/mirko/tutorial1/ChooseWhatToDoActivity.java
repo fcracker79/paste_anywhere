@@ -55,6 +55,14 @@ public class ChooseWhatToDoActivity extends AppCompatActivity {
         this.startActivity(mainIntent);
     }
 
+    public void onClickReopenSandbox(View v) {
+        Intent mainIntent = new Intent(this, MaintTutorial1Activity.class);
+        mainIntent.putExtra(
+                MaintTutorial1Activity.RESTORE_FROM_PREFERENCES_EXTRA_INTENT,
+                true);
+
+        this.startActivity(mainIntent);
+    }
     public void onClickRate(View v) {
         Uri uri = Uri.parse("market://details?id=" + getPackageName());
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);

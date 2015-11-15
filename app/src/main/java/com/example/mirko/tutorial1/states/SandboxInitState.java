@@ -18,6 +18,13 @@ public class SandboxInitState implements SandboxState {
         owner.setEnableSandboxName(true);
         owner.endProgress();
         owner.setSandboxData(null, null);
+
+        /*
+        This may happen in case of restoring the channel from the shared preferences
+         */
+        if (owner.getToken() != null && owner.getToken().length() > 0) {
+            this.createClicked(owner);
+        }
     }
 
     @Override
@@ -43,6 +50,7 @@ public class SandboxInitState implements SandboxState {
                         owner.setSandboxData(uri, uid);
                         owner.setState(SandboxInSyncState.instance());
                         owner.endProgress();
+                        owner.saveChannelInPreferences();
                     }
                 }
         );

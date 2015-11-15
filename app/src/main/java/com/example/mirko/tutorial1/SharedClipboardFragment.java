@@ -2,6 +2,7 @@ package com.example.mirko.tutorial1;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,13 +10,14 @@ import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.mirko.tutorial1.states.SandboxInSyncState;
 import com.example.mirko.tutorial1.states.SandboxInitState;
+import com.example.mirko.tutorial1.states.SandboxRestoreFromPreferenceState;
 import com.example.mirko.tutorial1.states.SandboxState;
 import com.example.mirko.tutorial1.states.SandboxStateOwner;
 
@@ -30,9 +32,12 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     private volatile ProgressBar mProgressBar;
     private volatile TextView mHyperlink;
     private volatile Context ctx;
+    private volatile boolean restoreFromSharedPreferences;
+    public static SharedClipboardFragment newInstance(boolean restoreFromSharedPreferences) {
+        final SharedClipboardFragment result = new SharedClipboardFragment();
+        result.restoreFromSharedPreferences = restoreFromSharedPreferences;
 
-    public static SharedClipboardFragment newInstance() {
-        return new SharedClipboardFragment();
+        return result;
     }
 
     public SharedClipboardFragment() {
@@ -98,7 +103,9 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
 
             @Override
             public void afterTextChanged(Editable s) {
-                SharedClipboardFragment.this.state.sandboxNameChanged(SharedClipboardFragment.this);
+                if (SharedClipboardFragment.this.state != null) {
+                    SharedClipboardFragment.this.state.sandboxNameChanged(SharedClipboardFragment.this);
+                }
             }
         });
 
@@ -107,11 +114,28 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         this.mHyperlink = (TextView) v.findViewById(R.id.text_view_hyperlink);
         this.mHyperlink.setMovementMethod(LinkMovementMethod.getInstance());
 
-        if (this.state != null) {
-            // Refresh the current state
-            this.setState(this.state);
-        } else {
-            this.setState(SandboxInitState.instance());
+        boolean successfullyRestoredFromPreferences = false;
+        if (restoreFromSharedPreferences) {
+            /*
+            This is to prevent the fragment to accidentally run the refresh from the preferences.
+            This should not be a problem, as the current state is automatically saved.
+            Maybe, though, I might think of changing this behaviour.
+             */
+            restoreFromSharedPreferences = false;
+            if (restoreChannelFromPreferences()) {
+                setState(SandboxRestoreFromPreferenceState.instance());
+                successfullyRestoredFromPreferences = true;
+            }
+        }
+
+        if (!successfullyRestoredFromPreferences) {
+            if (this.state != null) {
+                // Refresh the current state.
+                // This may happen when rotating the device
+                this.setState(this.state);
+            } else {
+                this.setState(SandboxInitState.instance());
+            }
         }
 
         return v;
@@ -191,13 +215,53 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         return uid;
     }
 
+    private void setUid(String uid) {
+        this.uid = uid;
+    }
+
     @Override
     public CharSequence getToken() {
         return mSandboxName.getText();
     }
 
+    private void setToken(String token) {
+        mSandboxName.setText(token);
+    }
+
     @Override
     public void setEnableSandboxName(boolean enable) {
         this.mSandboxName.setEnabled(enable);
+    }
+
+    private static final String PREF_NAME = "pasteAnywhereState";
+    private static final String TOKEN = "token";
+    private static final String UID = "uid";
+    @Override
+    public void saveChannelInPreferences() {
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(TOKEN, getToken().toString());
+        editor.putString(UID, getUid());
+        editor.apply();
+    }
+
+    @Override
+    public boolean restoreChannelFromPreferences() {
+        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        final String token = sharedPreferences.getString(TOKEN, null);
+        if (token == null) {
+            return false;
+        }
+
+        setToken(token);
+        setUid(sharedPreferences.getString(UID, null));
+
+        return true;
+    }
+
+    @Override
+    public void setSandboxContents(String data, String uri) {
+        this.mSandbox.setText(data);
+        this.mHyperlink.setText(uri);
     }
 }

@@ -15,7 +15,10 @@ public interface SandboxStateOwner {
     SandboxRepository getSandboxRepository();
     String getUid();
     void setSandboxData(String uri, String uid);
+    void setSandboxContents(String data, String uri);
     void startProgress();
     void endProgress();
     CharSequence getToken();
+    void saveChannelInPreferences();
+    boolean restoreChannelFromPreferences();
 }

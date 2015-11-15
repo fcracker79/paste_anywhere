@@ -21,13 +21,16 @@ public class SandboxRepository {
         this.ctx = ctx;
     }
 
-    public void getData(String uid, final SandboxDataReceiveEventListener l) {
-        client.get(ctx, String.format("%s/sandbox/%s", SERVER_NAME, uid), new JsonHttpResponseHandler() {
+    public void getData(String token, final SandboxDataReceiveEventListener l) {
+        client.get(ctx, String.format("%s/sandbox/%s", SERVER_NAME, token), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    final String result = (String) response.get("result");
-                    l.onDataReceived(result);
+                    final JSONObject result = (JSONObject) response.get("result");
+                    final String data = (String) result.get("content");
+                    final String uri = String.format("%s/%s", SERVER_NAME, result.get("url"));
+
+                    l.onDataReceived(data, uri);
                 } catch (JSONException e) {
                     throw new RuntimeException(e);
                 }
@@ -99,7 +102,7 @@ public class SandboxRepository {
     }
 
     public interface SandboxDataReceiveEventListener {
-        void onDataReceived(String data);
+        void onDataReceived(String data, String uri);
         void onDataReceiveFailed(int statusCode, Throwable cause);
     }
 }
