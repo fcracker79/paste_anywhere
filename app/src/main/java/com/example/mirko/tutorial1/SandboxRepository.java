@@ -12,7 +12,7 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 public class SandboxRepository {
-    private static final String SERVER_NAME = "http://192.168.122.1:5000/sandbox";
+    private static final String SERVER_NAME = "http://192.168.122.1:5000";
 
     private final Context ctx;
     private final AsyncHttpClient client = new AsyncHttpClient();
@@ -22,7 +22,7 @@ public class SandboxRepository {
     }
 
     public void getData(String uid, final SandboxDataReceiveEventListener l) {
-        client.get(ctx, String.format("%s/%s", SERVER_NAME, uid), new JsonHttpResponseHandler() {
+        client.get(ctx, String.format("%s/sandbox/%s", SERVER_NAME, uid), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -42,7 +42,7 @@ public class SandboxRepository {
     public void postData(String uid, CharSequence data, final SandboxDataSaveEventListener l) {
         final RequestParams p = new RequestParams();
         p.put("data", data.toString());
-        client.put(ctx, String.format("%s/%s", SERVER_NAME, uid), p, new JsonHttpResponseHandler() {
+        client.put(ctx, String.format("%s/sandbox/%s", SERVER_NAME, uid), p, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 l.onDataSaved();
@@ -59,7 +59,7 @@ public class SandboxRepository {
         final RequestParams p = new RequestParams();
         p.put("token", token);
 
-        client.post(ctx, SERVER_NAME, p, new JsonHttpResponseHandler() {
+        client.post(ctx, String.format("%s/sandbox", SERVER_NAME), p, new JsonHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
