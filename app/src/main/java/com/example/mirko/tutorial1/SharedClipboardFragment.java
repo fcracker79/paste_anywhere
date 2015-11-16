@@ -33,10 +33,12 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     private volatile TextView mHyperlink;
     private volatile Context ctx;
     private volatile boolean restoreFromSharedPreferences;
-    public static SharedClipboardFragment newInstance(boolean restoreFromSharedPreferences) {
+    private volatile String initialContent;
+    public static SharedClipboardFragment newInstance(boolean restoreFromSharedPreferences,
+                                                      String initialContent) {
         final SharedClipboardFragment result = new SharedClipboardFragment();
         result.restoreFromSharedPreferences = restoreFromSharedPreferences;
-
+        result.initialContent = initialContent;
         return result;
     }
 
@@ -164,6 +166,9 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         this.mSandbox.setEnabled(enable);
         this.mHyperlink.setVisibility(enable ? View.VISIBLE : View.GONE);
         this.mHyperlink.setEnabled(enable);
+        if (enable && this.initialContent != null) {
+            this.mSandbox.setText(this.initialContent);
+        }
     }
 
     @Override

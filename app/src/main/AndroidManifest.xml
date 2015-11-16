@@ -19,6 +19,12 @@
         <activity
             android:name=".MaintTutorial1Activity"
             android:label="@string/app_name" >
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/*" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".SplashActivity"

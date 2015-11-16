@@ -14,12 +14,22 @@ public class MaintTutorial1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_maint_tutorial1);
 
         final Intent intent = getIntent();
-        final Bundle extras = intent.getExtras();
-        final boolean restoreFromPreferences =
+        final String content;
+        if (intent != null && Intent.ACTION_SEND.equals(intent.getAction())) {
+            content = intent.getStringExtra(Intent.EXTRA_TEXT);
+        } else {
+            content = null;
+        }
+        final Bundle extras = intent == null ? null : intent.getExtras();
+        final boolean requestRestoreFromPreferences =
                 extras != null && extras.getBoolean(RESTORE_FROM_PREFERENCES_EXTRA_INTENT, false);
+        final boolean showSharedContents = content != null;
+        final boolean restoreFromPreferences = requestRestoreFromPreferences || showSharedContents;
         if (getFragmentManager().findFragmentById(android.R.id.content)==null) {
             getFragmentManager().beginTransaction()
-                    .add(android.R.id.content, SharedClipboardFragment.newInstance(restoreFromPreferences))
+                    .add(
+                            android.R.id.content,
+                            SharedClipboardFragment.newInstance(restoreFromPreferences, content))
                     .addToBackStack("settings")
                     .commit();
         }
