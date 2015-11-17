@@ -1,4 +1,4 @@
-package com.example.mirko.tutorial1;
+package com.example.mirko.tutorial1.backend;
 
 import android.content.Context;
 
@@ -11,17 +11,18 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SandboxRepository {
+class StandaloneSandboxRepository implements SandboxRepository {
     private static final String SERVER_NAME = "http://192.168.122.1:5000";
 
     private final Context ctx;
     private final AsyncHttpClient client = new AsyncHttpClient();
 
-    public SandboxRepository(Context ctx) {
+    public StandaloneSandboxRepository(Context ctx) {
         this.ctx = ctx;
     }
 
-    public void getData(String token, final SandboxDataReceiveEventListener l) {
+    @Override
+    public void getData(String uid, String token, final SandboxRepository.SandboxDataReceiveEventListener l) {
         client.get(ctx, String.format("%s/sandbox/%s", SERVER_NAME, token), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -42,7 +43,9 @@ public class SandboxRepository {
             }
         });
     }
-    public void postData(String uid, CharSequence data, final SandboxDataSaveEventListener l) {
+
+    @Override
+    public void postData(String uid, CharSequence data, final SandboxRepository.SandboxDataSaveEventListener l) {
         final RequestParams p = new RequestParams();
         p.put("data", data.toString());
         client.put(ctx, String.format("%s/sandbox/%s", SERVER_NAME, uid), p, new JsonHttpResponseHandler() {
@@ -58,7 +61,8 @@ public class SandboxRepository {
         });
     }
 
-    public void create(CharSequence token, final SandboxCreationEventListener l) {
+    @Override
+    public void create(CharSequence token, final SandboxRepository.SandboxCreationEventListener l) {
         final RequestParams p = new RequestParams();
         p.put("token", token);
 
@@ -88,21 +92,5 @@ public class SandboxRepository {
 
             }
         });
-    }
-
-
-    public interface SandboxCreationEventListener {
-        void onSandboxCreationFailed(int statusCode, Throwable cause);
-        void onSandboxCreated(String uri, String uid);
-    }
-
-    public interface SandboxDataSaveEventListener {
-        void onDataSaveFailed(int statusCode, Throwable cause);
-        void onDataSaved();
-    }
-
-    public interface SandboxDataReceiveEventListener {
-        void onDataReceived(String data, String uri);
-        void onDataReceiveFailed(int statusCode, Throwable cause);
     }
 }

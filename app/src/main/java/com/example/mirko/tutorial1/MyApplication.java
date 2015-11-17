@@ -6,6 +6,9 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.util.Log;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 import java.lang.reflect.Field;
 
 public class MyApplication extends Application implements Thread.UncaughtExceptionHandler {
@@ -25,6 +28,13 @@ public class MyApplication extends Application implements Thread.UncaughtExcepti
         super.onCreate();
 
         setDefaultFont(this, "SERIF", "fonts/roof-runners-active.bold.ttf");
+
+        Parse.enableLocalDatastore(this);
+
+        Parse.initialize(
+                this,
+                "0sJuJGyaAx8wwJ35WALeLAEwnlZeb1xG4WKvYbZO",
+                "Q95dPyOjyBcF985641WXCWrONSePjohLONtmCNkn");
     }
 
     private static void setDefaultFont(Context context,

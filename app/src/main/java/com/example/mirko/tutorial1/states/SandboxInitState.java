@@ -2,7 +2,7 @@ package com.example.mirko.tutorial1.states;
 
 import android.util.Log;
 
-import com.example.mirko.tutorial1.SandboxRepository;
+import com.example.mirko.tutorial1.backend.SandboxRepository;
 
 public class SandboxInitState implements SandboxState {
 

@@ -1,6 +1,6 @@
 package com.example.mirko.tutorial1.states;
 
-import com.example.mirko.tutorial1.SandboxRepository;
+import com.example.mirko.tutorial1.backend.SandboxRepository;
 
 /**
  * Created by mirko on 31/10/15.

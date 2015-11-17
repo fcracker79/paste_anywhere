@@ -2,11 +2,8 @@ package com.example.mirko.tutorial1.states;
 
 import android.util.Log;
 
-import com.example.mirko.tutorial1.SandboxRepository;
+import com.example.mirko.tutorial1.backend.SandboxRepository;
 
-/**
- * Created by mirko on 15/11/15.
- */
 public class SandboxRestoreFromPreferenceState implements SandboxState {
     private static final SandboxState INSTANCE = new SandboxRestoreFromPreferenceState();
     public static SandboxState instance() {
@@ -16,7 +13,8 @@ public class SandboxRestoreFromPreferenceState implements SandboxState {
 
     @Override
     public void onEnter(final SandboxStateOwner owner, SandboxState previous) {
-        owner.getSandboxRepository().getData(owner.getToken().toString(),
+        owner.getSandboxRepository().getData(
+                owner.getUid(), owner.getToken().toString(),
                 new SandboxRepository.SandboxDataReceiveEventListener() {
                     @Override
                     public void onDataReceiveFailed(int statusCode, Throwable cause) {

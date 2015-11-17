@@ -15,7 +15,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.mirko.tutorial1.states.SandboxInSyncState;
+import com.example.mirko.tutorial1.backend.SandboxRepository;
+import com.example.mirko.tutorial1.backend.SandboxRepositoryFactory;
 import com.example.mirko.tutorial1.states.SandboxInitState;
 import com.example.mirko.tutorial1.states.SandboxRestoreFromPreferenceState;
 import com.example.mirko.tutorial1.states.SandboxState;
@@ -62,7 +63,7 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
         This should be in the ' onAttach()' method
          */
         this.ctx = inflater.getContext();
-        this.sandboxRepository = new SandboxRepository(this.ctx);
+        this.sandboxRepository = SandboxRepositoryFactory.instance().create(this.ctx);
 
         this.mCreateButton = (Button) v.findViewById(R.id.button_attach_sandbox);
         this.mSandbox = (EditText) v.findViewById(R.id.edit_text_sandbox);
