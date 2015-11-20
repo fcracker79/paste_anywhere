@@ -47,7 +47,8 @@
         android:clickable="true"
         android:visibility="gone"
         android:freezesText="true"
-        android:layout_below="@id/layout_sandbox_name"/>
+        android:layout_below="@id/layout_sandbox_name"
+        style="@style/sandboxHyperlink"/>
     <EditText
         android:id="@+id/edit_text_sandbox"
         android:inputType="text"

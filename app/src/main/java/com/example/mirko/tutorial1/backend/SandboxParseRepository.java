@@ -7,7 +7,7 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 
 class SandboxParseRepository implements SandboxRepository {
-    private static final String URL = "http://localhost/%s";
+    private static final String URL = "https://pasteanywhere.parseapp.com?c=%s";
     private static final String SANDBOX_CLASS_NAME = "Sandbox";
 
     @Override

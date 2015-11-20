@@ -50,6 +50,7 @@
     <style name="sandboxHyperlink" parent="AppTheme">
         <item name="android:padding">10dp</item>
         <item name="android:layout_margin">10dp</item>
+        <item name="android:typeface">monospace</item>
     </style>
 
     <style name="splashStringText" parent="AppTheme">
