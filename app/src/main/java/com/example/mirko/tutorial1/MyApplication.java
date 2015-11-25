@@ -57,14 +57,4 @@ public class MyApplication extends Application implements Thread.UncaughtExcepti
             throw new RuntimeException(e);
         }
     }
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
-    @Override
-    public void onTerminate() {
-        super.onTerminate();
-    }
-
 }
