@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
@@ -203,7 +204,8 @@ public class SharedClipboardFragment extends Fragment implements SandboxStateOwn
     @Override
     public void setSandboxData(String uri, String uid) {
         this.uid = uid;
-        this.mHyperlink.setText(uri);
+        this.mHyperlink.setText(Html.fromHtml(String.format("<a href=\"%s\">%s</a>",
+                uri, uri)));
     }
 
     @Override
